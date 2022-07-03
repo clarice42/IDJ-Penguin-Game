@@ -48,6 +48,11 @@ Game::Game(string title, int width, int height)
         SDL_Log("Unable to initialize sound library: %s", SDL_GetError());
     }
 
+    if (!Mix_AllocateChannels(32))
+    {
+        SDL_Log("Unable to allocate channels: %s", SDL_GetError());
+    }
+
     // Janela
     window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 

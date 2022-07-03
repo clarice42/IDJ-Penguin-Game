@@ -27,7 +27,7 @@ void Music::Open(string file)
 {
     music = Mix_LoadMUS(file.c_str());
 
-    if (Mix_LoadMUS(file.c_str()) == nullptr)
+    if (music == nullptr)
     {
         printf("Could not load music: %s\n", SDL_GetError());
     }
