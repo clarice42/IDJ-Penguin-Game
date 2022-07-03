@@ -1,6 +1,5 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
-#endif
 
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.hpp"
@@ -27,3 +26,5 @@ public:
     int GetHeight();
     bool IsOpen();
 };
+
+#endif

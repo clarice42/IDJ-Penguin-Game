@@ -1,10 +1,12 @@
 #ifndef STATE_HPP
 #define STATE_HPP
-#endif
 
 #include "Sprite.hpp"
 #include "Music.hpp"
 #include <iostream>
+
+#define BACKGROUND_PATH "assets/ocean.jpg"
+#define MUSIC_PATH "assets/stageState.ogg"
 
 using namespace std;
 
@@ -22,3 +24,5 @@ public:
     void Update(float);
     void Render();
 };
+
+#endif

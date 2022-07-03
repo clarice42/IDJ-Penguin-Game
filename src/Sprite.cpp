@@ -48,12 +48,12 @@ void Sprite::SetClip(int x, int y, int w, int h)
 
 void Sprite::Render(int x, int y)
 {
-    SDL_Rect dstreact;
-    dstreact.x = x;
-    dstreact.y = y;
-    dstreact.w = clipRect.w;
-    dstreact.h = clipRect.h;
-    SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstreact);
+    SDL_Rect dstrect;
+    dstrect.x = x;
+    dstrect.y = y;
+    dstrect.w = clipRect.w;
+    dstrect.h = clipRect.h;
+    SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstrect);
 }
 
 int Sprite::GetWidth()
@@ -72,6 +72,5 @@ bool Sprite::IsOpen()
     {
         return true;
     }
-
     return false;
 }

@@ -1,6 +1,5 @@
 #ifndef MUSIC_HPP
 #define MUSIC_HPP
-#endif
 
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.hpp"
@@ -22,3 +21,5 @@ public:
     void Open(string);
     bool IsOpen();
 };
+
+#endif

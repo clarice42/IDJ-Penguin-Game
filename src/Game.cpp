@@ -9,7 +9,7 @@ Game &Game::GetInstance()
 {
     if (instance == nullptr)
     {
-        new Game("Clara", 1024, 600);
+        new Game(GAME_TITLE, GAME_WIDTH, GAME_HEIGHT);
     }
     return *instance;
 }
@@ -18,7 +18,7 @@ Game::Game(string title, int width, int height)
 {
     if (instance != nullptr)
     {
-        throw invalid_argument("Já existe uma instancia do jogo!");
+        throw invalid_argument("There is already an instance of the game!");
     }
 
     instance = this;
@@ -32,7 +32,7 @@ Game::Game(string title, int width, int height)
     // Imagem
     if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF) == 0)
     {
-        throw invalid_argument("Biblioteca de imagem não inicializou corretamente!");
+        SDL_Log("Unable to initialize image library: %s", SDL_GetError());
     }
 
     // Som
@@ -40,12 +40,12 @@ Game::Game(string title, int width, int height)
                       MIX_DEFAULT_FORMAT,
                       MIX_DEFAULT_CHANNELS, 1024) != 0)
     {
-        throw invalid_argument("Biblioteca de audio não inicializou corretamente!");
+        SDL_Log("Unable to initialize audio library: %s", SDL_GetError());
     }
 
-    if (!Mix_Init(MIX_INIT_OGG | MIX_INIT_MP3))
+    if (Mix_Init(MIX_INIT_OGG | MIX_INIT_MP3) == 0)
     {
-        SDL_Log("Unable to initialize sound: %s", SDL_GetError());
+        SDL_Log("Unable to initialize sound library: %s", SDL_GetError());
     }
 
     // Janela
@@ -91,7 +91,6 @@ void Game::Run()
 {
     while (!state->QuitRequested())
     {
-        state->LoadAssets();
         state->Update(1.0);
         state->Render();
         SDL_RenderPresent(renderer);

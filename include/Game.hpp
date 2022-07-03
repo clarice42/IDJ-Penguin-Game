@@ -1,12 +1,15 @@
 #ifndef GAME_HPP
 #define GAME_HPP
-#endif
 
 #define INCLUDE_SDL
 #include "SDL_include.hpp"
 #include <SDL2/SDL.h>
 #include "State.hpp"
 #include <iostream>
+
+#define GAME_TITLE "Clara Resende Maia - 180030931"
+#define GAME_WIDTH 1024
+#define GAME_HEIGHT 600
 
 using namespace std;
 
@@ -26,3 +29,5 @@ public:
     State &GetState();
     static Game &GetInstance();
 };
+
+#endif
