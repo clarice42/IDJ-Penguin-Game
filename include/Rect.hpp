@@ -1,7 +1,7 @@
 #ifndef RECT_HPP
 #define RECT_HPP
 
-#include <stdio.h>
+#include <iostream>
 
 using namespace std;
 

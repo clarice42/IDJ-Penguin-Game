@@ -1,7 +1,7 @@
 #ifndef VEC2_HPP
 #define VEC2_HPP
 
-#include <stdio.h>
+#include <iostream>
 
 using namespace std;
 

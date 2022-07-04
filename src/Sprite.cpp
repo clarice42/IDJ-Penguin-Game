@@ -1,11 +1,11 @@
 #include "Game.hpp"
 
-Sprite::Sprite()
+Sprite::Sprite(GameObject &associated) : Component(associated)
 {
     texture = nullptr;
 }
 
-Sprite::Sprite(string file)
+Sprite::Sprite(string file, GameObject &associated) : Component(associated)
 {
     texture = nullptr;
     Open(file);
@@ -72,5 +72,19 @@ bool Sprite::IsOpen()
     {
         return true;
     }
+    return false;
+}
+
+void Sprite::Update(float dt) {}
+
+void Sprite::Render() {}
+
+bool Sprite::Is(string type)
+{
+    if (type == "Sprite")
+    {
+        return true;
+    }
+
     return false;
 }
