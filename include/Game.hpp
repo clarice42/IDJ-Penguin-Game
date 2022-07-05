@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include "State.hpp"
 #include <iostream>
+#include <cstdlib>
 
 #define GAME_TITLE "Clara Resende Maia - 180030931"
 #define GAME_WIDTH 1024

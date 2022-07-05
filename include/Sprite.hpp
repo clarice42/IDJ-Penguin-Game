@@ -22,12 +22,11 @@ public:
     ~Sprite();
     void Open(string);
     void SetClip(int, int, int, int);
-    void Render(int, int);
+    void Render();
     int GetWidth();
     int GetHeight();
     bool IsOpen();
     void Update(float);
-    void Render();
     bool Is(string);
 };
 

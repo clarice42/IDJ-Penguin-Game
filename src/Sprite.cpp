@@ -3,6 +3,8 @@
 Sprite::Sprite(GameObject &associated) : Component(associated)
 {
     texture = nullptr;
+    associated.box.w = width;
+    associated.box.h = height;
 }
 
 Sprite::Sprite(string file, GameObject &associated) : Component(associated)
@@ -46,11 +48,11 @@ void Sprite::SetClip(int x, int y, int w, int h)
     clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y)
+void Sprite::Render()
 {
     SDL_Rect dstrect;
-    dstrect.x = x;
-    dstrect.y = y;
+    dstrect.x = associated.box.x;
+    dstrect.y = associated.box.y;
     dstrect.w = clipRect.w;
     dstrect.h = clipRect.h;
     SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstrect);
@@ -76,8 +78,6 @@ bool Sprite::IsOpen()
 }
 
 void Sprite::Update(float dt) {}
-
-void Sprite::Render() {}
 
 bool Sprite::Is(string type)
 {

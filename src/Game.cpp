@@ -70,6 +70,8 @@ Game::Game(string title, int width, int height)
     }
 
     state = new State();
+
+    srand(time(NULL));
 }
 
 Game::~Game()

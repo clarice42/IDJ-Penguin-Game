@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Component.hpp"
 #include "Rect.hpp"
 
@@ -11,7 +12,7 @@ using namespace std;
 class GameObject
 {
 private:
-    vector<Component *> components;
+    vector<unique_ptr<Component>> components;
     bool isDead;
 
 public:

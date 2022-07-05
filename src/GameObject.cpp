@@ -44,12 +44,18 @@ void GameObject::RequestDelete()
 
 void GameObject::AddComponent(Component *cpt)
 {
-    components.push_back(cpt);
+    components.emplace_back(cpt);
 }
 
 void GameObject::RemoveComponent(Component *cpt)
 {
-    components.erase(find(components.begin(), components.end(), cpt));
+    for (vector<int>::size_type i = 0; i < components.size(); i++)
+    {
+        if (components[i].get() == cpt)
+        {
+            components.erase(components.begin() + i);
+        }
+    }
 }
 
 Component *GameObject::GetComponent(string type)
@@ -58,7 +64,7 @@ Component *GameObject::GetComponent(string type)
     {
         if (components[i]->Is(type))
         {
-            return components[i];
+            return components[i].get();
         }
     }
 
