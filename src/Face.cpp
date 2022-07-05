@@ -16,6 +16,7 @@ void Face::Damage(int damage)
         if (sound != nullptr)
         {
             sound->Play();
+            std::this_thread::sleep_for(std::chrono::milliseconds(700));
         }
     }
 }

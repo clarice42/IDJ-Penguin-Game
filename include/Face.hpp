@@ -2,6 +2,8 @@
 #define FACE_HPP
 
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "GameObject.hpp"
 #include "Sound.hpp"
 
