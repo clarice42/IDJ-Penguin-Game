@@ -13,23 +13,15 @@ Sprite::Sprite(string file, GameObject &associated) : Component(associated)
     Open(file);
 }
 
-Sprite::~Sprite()
-{
-    SDL_DestroyTexture(texture);
-}
+Sprite::~Sprite(){}
 
 void Sprite::Open(string file)
 {
-    if (texture != nullptr)
-    {
-        SDL_DestroyTexture(texture);
-    }
-
-    texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
+    texture = Resources::GetImage(file.c_str());
 
     if (texture == nullptr)
     {
-        printf("Could not create a texture: %s\n", SDL_GetError());
+        printf("Could not create a texture: %s\n");
     }
 
     if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height) == -1)

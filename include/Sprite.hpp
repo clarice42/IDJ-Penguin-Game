@@ -4,6 +4,7 @@
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.hpp"
 #include "Component.hpp"
+#include "Resources.hpp"
 #include <iostream>
 
 using namespace std;
