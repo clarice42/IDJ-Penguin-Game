@@ -6,7 +6,17 @@ TileMap::TileMap(GameObject& associated, string file, TileSet* tileSet) : Compon
 }
 
 void TileMap::Load(string file) {
-    
+    vector<int> tiles = [];
+    int x = 0, y = 0, z = 0, index = 0;
+
+    for(vector<int>::size_type i = 0; i < x; i++) {
+        for(vector<int>::size_type j = 0; j < y; j++) {
+            for(vector<int>::size_type k = 0; k < z; k++) {
+                tileMatrix[index] = tiles[i][j][k] - 1;
+                index++;
+            }
+        }
+    }
 }
 
 void TileMap::SetTileSet(TileSet* tileSetRec) {
@@ -15,7 +25,9 @@ void TileMap::SetTileSet(TileSet* tileSetRec) {
 
 int& TileMap::At(int x, int y, int z) {
     for(vector<int>::size_type i = 0; i < tileMatrix.size(); i++) {
-
+        if(x < mapWidth) {
+            
+        }
     }
 }
 
