@@ -15,8 +15,8 @@ class TileSet {
   int tileHeight;
   
   public:
-  TitleSet(int, int, string);
-  void RenderTile(unsigned, float, float);
+  TileSet(int, int, string);
+  void RenderTile(unsigned int, float, float);
   int GetTileWidth();
   int GetTileHeight();
 };

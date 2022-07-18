@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Resources.hpp"
 
 Sprite::Sprite(GameObject &associated) : Component(associated)
 {
@@ -21,7 +22,7 @@ void Sprite::Open(string file)
 
     if (texture == nullptr)
     {
-        printf("Could not create a texture: %s\n");
+        printf("Could not create a texture!\n");
     }
 
     if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height) == -1)

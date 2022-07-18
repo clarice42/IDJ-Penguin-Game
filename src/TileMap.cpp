@@ -1,52 +1,85 @@
 #include "TileMap.hpp"
+#include "Game.hpp"
+#include <fstream>
 
-TileMap::TileMap(GameObject& associated, string file, TileSet* tileSet) : Component(associated) {
+TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet) : Component(associated)
+{
     Load(file);
     SetTileSet(tileSet);
 }
 
-void TileMap::Load(string file) {
-    vector<int> tiles = [];
-    int x = 0, y = 0, z = 0, index = 0;
+void TileMap::Load(string file)
+{
+    ifstream fileStream(file);
 
-    for(vector<int>::size_type i = 0; i < x; i++) {
-        for(vector<int>::size_type j = 0; j < y; j++) {
-            for(vector<int>::size_type k = 0; k < z; k++) {
-                tileMatrix[index] = tiles[i][j][k] - 1;
-                index++;
-            }
+    if (fileStream.is_open())
+    {
+        char comma;
+        fileStream >> mapWidth >> comma >> mapHeight >> comma >> mapDepth >> comma;
+        int value;
+        while (fileStream >> value)
+        {
+            tileMatrix.push_back(value - 1);
+            fileStream >> comma;
         }
     }
 }
 
-void TileMap::SetTileSet(TileSet* tileSetRec) {
+void TileMap::SetTileSet(TileSet *tileSetRec)
+{
     tileSet = tileSetRec;
 }
 
-int& TileMap::At(int x, int y, int z) {
-    for(vector<int>::size_type i = 0; i < tileMatrix.size(); i++) {
-        if(x < mapWidth) {
-            
+int &TileMap::At(int x, int y, int z)
+{
+    int index = x + (mapWidth * y) + (mapWidth * mapHeight * z);
+    return tileMatrix[index];
+}
+
+void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
+{
+    for (int i = 0; i < mapWidth; i++)
+    {
+        for (int j = 0; j < mapHeight; j++)
+        {
+            int x = i * tileSet->GetTileWidth() - cameraX;
+            int y = j * tileSet->GetTileHeight() - cameraY;
+            int index = At(i, j, layer);
+            tileSet->RenderTile(index, x, y);
         }
     }
 }
 
-void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
-
+void TileMap::Render()
+{
+    for (int i = 0; i < mapDepth; i++)
+    {
+        RenderLayer(i, associated.box.x, associated.box.y);
+    }
 }
 
-void TileMap::Render() {
-
-}
-
-int TileMap::GetWidth() {
+int TileMap::GetWidth()
+{
     return mapWidth;
 }
 
-int TileMap::GetHeight() {
+int TileMap::GetHeight()
+{
     return mapHeight;
 }
 
-int TileMap::GetDepth() {
+int TileMap::GetDepth()
+{
     return mapDepth;
+}
+
+void TileMap::Update(float dt) {}
+
+bool TileMap::Is(string type)
+{
+    if (type == "TileMap")
+    {
+        return true;
+    }
+    return false;
 }

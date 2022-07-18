@@ -1,4 +1,6 @@
 #include "State.hpp"
+#include "TileMap.hpp"
+#include "TileSet.hpp"
 
 State::State()
 {
@@ -14,6 +16,11 @@ State::State()
     object->box.h = bg->GetHeight();
 
     objectArray.emplace_back(object);
+
+    GameObject *object2 = new GameObject();
+    TileMap *tileMap = new TileMap(*object2, "assets/tileMap.txt", new TileSet(64, 64, "assets/tileset,png"));
+    object2->AddComponent(tileMap);
+    objectArray.emplace_back(object2);
 
     LoadAssets();
     music.Play();

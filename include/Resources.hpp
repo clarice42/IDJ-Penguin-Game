@@ -13,7 +13,7 @@ class Resources {
     unordered_map<string, Mix_Chunk*> soundTable;
 
     public:
-    SDL_Texture* GetImage(string);
+    static SDL_Texture* GetImage(string);
     void ClearImages();
     Mix_Music* GetMusic(string);
     void ClearMusics();

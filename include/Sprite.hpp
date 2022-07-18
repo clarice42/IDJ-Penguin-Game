@@ -4,7 +4,6 @@
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.hpp"
 #include "Component.hpp"
-#include "Resources.hpp"
 #include <iostream>
 
 using namespace std;
@@ -24,6 +23,7 @@ public:
     void Open(string);
     void SetClip(int, int, int, int);
     void Render();
+    void Render(int, int);
     int GetWidth();
     int GetHeight();
     bool IsOpen();
