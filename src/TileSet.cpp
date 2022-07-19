@@ -3,9 +3,9 @@
 
 TileSet::TileSet(int width, int height, string file) : tileSet(*new GameObject)
 {
+  tileSet.Open(file);
   tileWidth = width;
   tileHeight = height;
-  tileSet.Open(file);
   rows = tileSet.GetHeight() / tileHeight;
   columns = tileSet.GetWidth() / tileWidth;
 }

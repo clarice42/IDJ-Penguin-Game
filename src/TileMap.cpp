@@ -16,18 +16,20 @@ void TileMap::Load(string file)
     {
         char comma;
         fileStream >> mapWidth >> comma >> mapHeight >> comma >> mapDepth >> comma;
-        int value;
-        while (fileStream >> value)
+        int matrix_value;
+        while (fileStream >> matrix_value)
         {
-            tileMatrix.push_back(value - 1);
+            tileMatrix.push_back(matrix_value - 1);
             fileStream >> comma;
         }
     }
+
+    fileStream.close();
 }
 
-void TileMap::SetTileSet(TileSet *tileSetRec)
+void TileMap::SetTileSet(TileSet *tileSet_aux)
 {
-    tileSet = tileSetRec;
+    tileSet = tileSet_aux;
 }
 
 int &TileMap::At(int x, int y, int z)
@@ -42,10 +44,10 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
     {
         for (int j = 0; j < mapHeight; j++)
         {
-            int x = i * tileSet->GetTileWidth() - cameraX;
-            int y = j * tileSet->GetTileHeight() - cameraY;
+            int x_position = i * tileSet->GetTileWidth() - cameraX;
+            int y_position = j * tileSet->GetTileHeight() - cameraY;
             int index = At(i, j, layer);
-            tileSet->RenderTile(index, x, y);
+            tileSet->RenderTile(index, x_position, y_position);
         }
     }
 }

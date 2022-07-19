@@ -9,9 +9,13 @@ SDL_Texture *Resources::GetImage(string file)
 {
     if (imageTable.count(file) == 0)
     {
-        cout << "Image not found!\n";
         SDL_Texture *texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
         imageTable.emplace(file, texture);
+
+        if (texture == nullptr)
+        {
+            printf("Could not get image: %s\n", SDL_GetError());
+        }
     }
 
     return imageTable[file];
@@ -31,9 +35,13 @@ Mix_Music *Resources::GetMusic(string file)
 {
     if (musicTable.count(file) == 0)
     {
-        cout << "Music not found!\n";
         Mix_Music *music = Mix_LoadMUS(file.c_str());
         musicTable.emplace(file, music);
+
+        if (music == nullptr)
+        {
+            printf("Could not get music: %s\n", SDL_GetError());
+        }
     }
 
     return musicTable[file];
@@ -53,9 +61,13 @@ Mix_Chunk *Resources::GetSound(string file)
 {
     if (soundTable.count(file) == 0)
     {
-        cout << "Sound not found!\n";
         Mix_Chunk *sound = Mix_LoadWAV(file.c_str());
         soundTable.emplace(file, sound);
+
+        if (sound == nullptr)
+        {
+            printf("Could not get sound: %s\n", SDL_GetError());
+        }
     }
 
     return soundTable[file];

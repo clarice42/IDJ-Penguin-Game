@@ -14,6 +14,10 @@
 
 #define BACKGROUND_PATH "assets/ocean.jpg"
 #define MUSIC_PATH "assets/stageState.ogg"
+#define TILESET_PATH "assets/tileset.png"
+#define TILEMAP_PATH "assets/tileMap.txt"
+#define PENGUIN_FACE "assets/penguinface.png"
+#define EXPLOSION_SOUND "assets/boom.wav"
 #define PI 3.14159265359
 
 using namespace std;
