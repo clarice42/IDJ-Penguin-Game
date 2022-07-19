@@ -20,11 +20,6 @@ void Sprite::Open(string file)
 {
     texture = Resources::GetImage(file.c_str());
 
-    if (texture == nullptr)
-    {
-        printf("Could not create a texture!\n");
-    }
-
     if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height) == -1)
     {
         printf("Invalid texture: %s\n", SDL_GetError());

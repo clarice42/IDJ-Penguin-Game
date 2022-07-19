@@ -18,8 +18,10 @@ State::State()
     objectArray.emplace_back(object);
 
     GameObject *object2 = new GameObject();
-    TileMap *tileMap = new TileMap(*object2, "assets/tileMap.txt", new TileSet(64, 64, "assets/tileset,png"));
+    TileMap *tileMap = new TileMap(*object2, "assets/tileMap.txt", new TileSet(64, 64, "assets/tileset.png"));
     object2->AddComponent(tileMap);
+    object2->box.x = 0;
+    object2->box.y = 0;
     objectArray.emplace_back(object2);
 
     LoadAssets();

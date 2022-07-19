@@ -2,6 +2,7 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.hpp"
 #include "Game.hpp"
+#include "Resources.hpp"
 
 Game *Game::instance = nullptr;
 
@@ -103,4 +104,8 @@ void Game::Run()
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
+
+    Resources::ClearImages();
+    Resources::ClearMusics();
+    Resources::ClearSounds();
 }
