@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Resources.hpp"
 
 Sprite::Sprite(GameObject &associated) : Component(associated)
 {
@@ -13,24 +14,11 @@ Sprite::Sprite(string file, GameObject &associated) : Component(associated)
     Open(file);
 }
 
-Sprite::~Sprite()
-{
-    SDL_DestroyTexture(texture);
-}
+Sprite::~Sprite(){}
 
 void Sprite::Open(string file)
 {
-    if (texture != nullptr)
-    {
-        SDL_DestroyTexture(texture);
-    }
-
-    texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
-
-    if (texture == nullptr)
-    {
-        printf("Could not create a texture: %s\n", SDL_GetError());
-    }
+    texture = Resources::GetImage(file.c_str());
 
     if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height) == -1)
     {
@@ -48,14 +36,18 @@ void Sprite::SetClip(int x, int y, int w, int h)
     clipRect.h = h;
 }
 
-void Sprite::Render()
-{
+void Sprite::Render(int x, int y) {
     SDL_Rect dstrect;
-    dstrect.x = associated.box.x;
-    dstrect.y = associated.box.y;
+    dstrect.x = x;
+    dstrect.y = y;
     dstrect.w = clipRect.w;
     dstrect.h = clipRect.h;
     SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstrect);
+}
+
+void Sprite::Render()
+{
+    Render(associated.box.x, associated.box.y);
 }
 
 int Sprite::GetWidth()

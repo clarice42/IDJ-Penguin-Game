@@ -1,19 +1,32 @@
 #include "State.hpp"
+#include "TileMap.hpp"
+#include "TileSet.hpp"
 
 State::State()
 {
     quitRequested = false;
-    GameObject *object = new GameObject();
+    GameObject *background_image = new GameObject();
 
-    bg = new Sprite(BACKGROUND_PATH, *object);
-    object->AddComponent(bg);
+    bg = new Sprite(BACKGROUND_PATH, *background_image);
+    background_image->AddComponent(bg);
 
-    object->box.x = 0;
-    object->box.y = 0;
-    object->box.w = bg->GetWidth();
-    object->box.h = bg->GetHeight();
+    background_image->box.x = 0;
+    background_image->box.y = 0;
+    background_image->box.w = bg->GetWidth();
+    background_image->box.h = bg->GetHeight();
 
-    objectArray.emplace_back(object);
+    objectArray.emplace_back(background_image);
+
+    GameObject *map = new GameObject();
+
+    TileSet *tileset = new TileSet(64, 64, TILESET_PATH);
+    TileMap *tileMap = new TileMap(*map, TILEMAP_PATH, tileset);
+    map->AddComponent(tileMap);
+
+    map->box.x = 0;
+    map->box.y = 0;
+
+    objectArray.emplace_back(map);
 
     LoadAssets();
     music.Play();
@@ -126,16 +139,21 @@ void State::Input()
 
 void State::AddObject(int mouseX, int mouseY)
 {
-    GameObject *object = new GameObject();
-    Sprite *sprite = new Sprite("assets/penguinface.png", *object);
-    object->AddComponent(sprite);
-    object->box.x = mouseX;
-    object->box.y = mouseY;
-    object->box.w = sprite->GetWidth();
-    object->box.h = sprite->GetHeight();
-    Sound *sound = new Sound(*object, "assets/boom.wav");
-    object->AddComponent(sound);
-    Face *face = new Face(*object);
-    object->AddComponent(face);
-    objectArray.emplace_back(object);
+    GameObject *penguin = new GameObject();
+
+    Sprite *penguin_face = new Sprite(PENGUIN_FACE, *penguin);
+    penguin->AddComponent(penguin_face);
+
+    penguin->box.x = mouseX;
+    penguin->box.y = mouseY;
+    penguin->box.w = penguin_face->GetWidth();
+    penguin->box.h = penguin_face->GetHeight();
+
+    Sound *explosion = new Sound(*penguin, EXPLOSION_SOUND);
+    penguin->AddComponent(explosion);
+
+    Face *enemy = new Face(*penguin);
+    penguin->AddComponent(enemy);
+
+    objectArray.emplace_back(penguin);
 }
