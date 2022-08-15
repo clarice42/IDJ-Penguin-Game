@@ -28,7 +28,6 @@ private:
     Sprite *bg;
     Music music;
     bool quitRequested;
-    void Input();
     void AddObject(int, int);
     vector<unique_ptr<GameObject>> objectArray;
 

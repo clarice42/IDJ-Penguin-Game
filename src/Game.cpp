@@ -3,6 +3,7 @@
 #include "SDL_include.hpp"
 #include "Game.hpp"
 #include "Resources.hpp"
+#include "InputManager.hpp"
 
 Game *Game::instance = nullptr;
 
@@ -99,12 +100,14 @@ void Game::Run()
 {
     while (!state->QuitRequested())
     {
+        InputManager::GetInstance().Update();
         state->Update(1.0);
         state->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
 
+    state->~State();
     Resources::ClearImages();
     Resources::ClearMusics();
     Resources::ClearSounds();

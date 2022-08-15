@@ -8,8 +8,11 @@ InputManager &InputManager::GetInstance()
 
 InputManager::InputManager()
 {
-    mouseState[6] = {};
-    mouseUpdate[6] = {};
+    for (int i = 0; i < 6; i++)
+    {
+        mouseState[i] = false;
+        mouseUpdate[i] = 0;
+    }
     quitRequested = false;
     updateCounter = 0;
     mouseX = 0;

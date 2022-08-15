@@ -1,4 +1,5 @@
 #include "Face.hpp"
+#include "InputManager.hpp"
 
 Face::Face(GameObject &associated) : Component(associated)
 {
@@ -21,7 +22,21 @@ void Face::Damage(int damage)
     }
 }
 
-void Face::Update(float dt) {}
+void Face::Update(float dt)
+{
+    InputManager input = InputManager::GetInstance();
+
+    for (int i = 0; i < 6; i++)
+    {
+        if (input.MousePress(i) && associated.box.Contains({(float)input.GetMouseX(), (float)input.GetMouseY()}))
+        {
+            // Aplica dano
+            Damage(std::rand() % 10 + 10);
+            // Sai do loop (só queremos acertar um)
+            break;
+        }
+    }
+}
 
 void Face::Render() {}
 
