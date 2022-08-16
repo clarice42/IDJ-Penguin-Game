@@ -74,6 +74,9 @@ Game::Game(string title, int width, int height)
     state = new State();
 
     srand(time(NULL));
+
+    frameStart = 0;
+    dt = 0.0;
 }
 
 Game::~Game()
@@ -100,6 +103,7 @@ void Game::Run()
 {
     while (!state->QuitRequested())
     {
+        CalculateDeltaTime();
         InputManager::GetInstance().Update();
         state->Update(1.0);
         state->Render();
@@ -111,4 +115,17 @@ void Game::Run()
     Resources::ClearImages();
     Resources::ClearMusics();
     Resources::ClearSounds();
+}
+
+void Game::CalculateDeltaTime()
+{
+    int frameEnd = SDL_GetTicks();
+    float frameDif = (float)(frameEnd - frameStart);
+    dt = frameDif / 1000;
+    frameStart = frameEnd;
+}
+
+float Game::GetDeltaTime()
+{
+    return dt;
 }
