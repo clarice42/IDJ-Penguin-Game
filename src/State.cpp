@@ -2,6 +2,7 @@
 #include "TileMap.hpp"
 #include "TileSet.hpp"
 #include "InputManager.hpp"
+#include "Camera.hpp"
 
 State::State()
 {
@@ -73,6 +74,7 @@ void State::Update(float dt)
             objectArray.erase(objectArray.begin() + i);
         }
     }
+    Camera::Update(dt);
 }
 
 void State::Render()
@@ -95,8 +97,8 @@ void State::AddObject(int mouseX, int mouseY)
     Sprite *penguin_face = new Sprite(PENGUIN_FACE, *penguin);
     penguin->AddComponent(penguin_face);
 
-    penguin->box.x = mouseX;
-    penguin->box.y = mouseY;
+    penguin->box.x = mouseX - Camera::pos.x + (penguin_face->GetWidth() / 2);
+    penguin->box.y = mouseY - Camera::pos.y + (penguin_face->GetHeight() / 2);
     penguin->box.w = penguin_face->GetWidth();
     penguin->box.h = penguin_face->GetHeight();
 

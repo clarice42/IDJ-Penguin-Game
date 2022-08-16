@@ -1,24 +1,27 @@
 #include "Face.hpp"
 #include "InputManager.hpp"
+#include "Camera.hpp"
 
 Face::Face(GameObject &associated) : Component(associated)
 {
     hitpoints = 30;
+    originalPos.x = associated.box.x;
+    originalPos.y = associated.box.y;
 }
 
 void Face::Damage(int damage)
 {
-    Sound *sound = (Sound *)associated.GetComponent("Sound");
     hitpoints -= damage;
 
     if (hitpoints <= 0)
     {
-        associated.RequestDelete();
+        Sound *sound = (Sound *)associated.GetComponent("Sound");
         if (sound != nullptr)
         {
             sound->Play();
             std::this_thread::sleep_for(std::chrono::milliseconds(700));
         }
+        associated.RequestDelete();
     }
 }
 
@@ -38,7 +41,11 @@ void Face::Update(float dt)
     }
 }
 
-void Face::Render() {}
+void Face::Render()
+{
+    associated.box.x = originalPos.x + Camera::pos.x;
+    associated.box.y = originalPos.y + Camera::pos.y;
+}
 
 bool Face::Is(string type)
 {
