@@ -3,6 +3,7 @@
 #include "TileSet.hpp"
 #include "InputManager.hpp"
 #include "Camera.hpp"
+#include "CameraFollower.hpp"
 
 State::State()
 {
@@ -27,6 +28,9 @@ State::State()
 
     map->box.x = 0;
     map->box.y = 0;
+
+    CameraFollower *cameraFollower = new CameraFollower(*map);
+    map->AddComponent(cameraFollower);
 
     objectArray.emplace_back(map);
 
