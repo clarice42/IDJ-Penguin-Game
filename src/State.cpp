@@ -17,7 +17,7 @@ State::State()
     background_image->box.y = 0;
     background_image->box.w = bg->GetWidth();
     background_image->box.h = bg->GetHeight();
-    
+
     CameraFollower *cameraFollower = new CameraFollower(*background_image);
     background_image->AddComponent(cameraFollower);
 
@@ -40,7 +40,6 @@ State::State()
 
 State::~State()
 {
-    music.Stop();
     objectArray.clear();
 }
 

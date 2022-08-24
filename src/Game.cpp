@@ -111,7 +111,6 @@ void Game::Run()
         SDL_Delay(33);
     }
 
-    state->~State();
     Resources::ClearImages();
     Resources::ClearMusics();
     Resources::ClearSounds();
