@@ -31,7 +31,7 @@ void Face::Update(float dt)
 
     for (int i = 0; i < 6; i++)
     {
-        if (input.MousePress(i) && associated.box.Contains({(float)input.GetMouseX(), (float)input.GetMouseY()}))
+        if (input.MousePress(i) && associated.box.Contains({(float)input.GetMouseX() + Camera::pos.x, (float)input.GetMouseY() + Camera::pos.y}))
         {
             // Aplica dano
             Damage(std::rand() % 10 + 10);
@@ -41,11 +41,7 @@ void Face::Update(float dt)
     }
 }
 
-void Face::Render()
-{
-    associated.box.x = originalPos.x + Camera::pos.x;
-    associated.box.y = originalPos.y + Camera::pos.y;
-}
+void Face::Render() {}
 
 bool Face::Is(string type)
 {

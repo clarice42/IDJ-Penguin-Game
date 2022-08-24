@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "Resources.hpp"
+#include "Camera.hpp"
 
 Sprite::Sprite(GameObject &associated) : Component(associated)
 {
@@ -14,7 +15,7 @@ Sprite::Sprite(string file, GameObject &associated) : Component(associated)
     Open(file);
 }
 
-Sprite::~Sprite(){}
+Sprite::~Sprite() {}
 
 void Sprite::Open(string file)
 {
@@ -36,7 +37,8 @@ void Sprite::SetClip(int x, int y, int w, int h)
     clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y) {
+void Sprite::Render(int x, int y)
+{
     SDL_Rect dstrect;
     dstrect.x = x;
     dstrect.y = y;
@@ -47,7 +49,7 @@ void Sprite::Render(int x, int y) {
 
 void Sprite::Render()
 {
-    Render(associated.box.x, associated.box.y);
+    Render(associated.box.x - Camera::pos.x, associated.box.y - Camera::pos.y);
 }
 
 int Sprite::GetWidth()
