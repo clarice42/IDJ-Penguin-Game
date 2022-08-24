@@ -18,8 +18,7 @@ void Face::Damage(int damage)
         Sound *sound = (Sound *)associated.GetComponent("Sound");
         if (sound != nullptr)
         {
-            sound->Play();
-            std::this_thread::sleep_for(std::chrono::milliseconds(700));
+            sound->Play(0);
         }
         associated.RequestDelete();
     }

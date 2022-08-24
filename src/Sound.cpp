@@ -29,13 +29,7 @@ void Sound::Open(string file)
     chunk = Resources::GetSound(file);
 }
 
-Sound::~Sound()
-{
-    if (chunk != nullptr)
-    {
-        Stop();
-    }
-}
+Sound::~Sound() {}
 
 bool Sound::IsOpen()
 {
