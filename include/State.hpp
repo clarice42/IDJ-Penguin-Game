@@ -29,7 +29,8 @@ private:
     Music music;
     bool quitRequested;
     void AddObject(int, int);
-    vector<unique_ptr<GameObject>> objectArray;
+    bool started;
+    vector<shared_ptr<GameObject>> objectArray;
 
 public:
     State();
@@ -38,6 +39,9 @@ public:
     void LoadAssets();
     void Update(float);
     void Render();
+    void Start();
+    weak_ptr<GameObject> AddObject(GameObject*);
+    weak_ptr<GameObject> GetOjectPtr(GameObject*);
 };
 
 #endif

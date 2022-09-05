@@ -8,6 +8,7 @@
 State::State()
 {
     quitRequested = false;
+    started = false;
     GameObject *background_image = new GameObject();
 
     bg = new Sprite(BACKGROUND_PATH, *background_image);
@@ -112,4 +113,15 @@ void State::AddObject(int mouseX, int mouseY)
     penguin->AddComponent(enemy);
 
     objectArray.emplace_back(penguin);
+}
+
+void State::Start() {
+    LoadAssets();
+
+    for (vector<int>::size_type i = 0; i < objectArray.size(); i++)
+    {
+        objectArray[i]->Start();
+    }
+
+    started = true;
 }
