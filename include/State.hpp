@@ -6,7 +6,6 @@
 #include <SDL2/SDL.h>
 #include "Sprite.hpp"
 #include "Music.hpp"
-#include "Face.hpp"
 #include "Vec2.hpp"
 #include <iostream>
 #include <vector>
