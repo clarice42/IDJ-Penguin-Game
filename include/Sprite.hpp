@@ -17,8 +17,8 @@ private:
     SDL_Rect clipRect;
 
 public:
-    Sprite(GameObject&);
-    Sprite(string, GameObject&);
+    Sprite(GameObject &);
+    Sprite(string, GameObject &);
     ~Sprite();
     void Open(string);
     void SetClip(int, int, int, int);
@@ -29,6 +29,7 @@ public:
     bool IsOpen();
     void Update(float);
     bool Is(string);
+    void Start(){};
 };
 
 #endif

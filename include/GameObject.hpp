@@ -14,6 +14,7 @@ class GameObject
 private:
     vector<unique_ptr<Component>> components;
     bool isDead;
+    bool started;
 
 public:
     GameObject();
@@ -24,6 +25,7 @@ public:
     void RequestDelete();
     void AddComponent(Component *);
     void RemoveComponent(Component *);
+    void Start();
     Component *GetComponent(string);
     Rect box;
 };

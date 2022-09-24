@@ -60,12 +60,12 @@ void State::Update(float dt)
         quitRequested = true;
     }
 
-    if (input.KeyPress(SPACE_KEY))
-    {
+    // if (input.KeyPress(SPACE_KEY))
+    // {
 
-        Vec2 objPos = Vec2(200, 0).GetRotated((-PI + PI * (rand() % 1001) / 500.0)) + Vec2(input.GetMouseX(), input.GetMouseY());
-        AddObject((int)objPos.x + Camera::pos.x, (int)objPos.y + Camera::pos.y);
-    }
+    //     Vec2 objPos = Vec2(200, 0).GetRotated((-PI + PI * (rand() % 1001) / 500.0)) + Vec2(input.GetMouseX(), input.GetMouseY());
+    //     AddObject((int)objPos.x + Camera::pos.x, (int)objPos.y + Camera::pos.y);
+    // }
 
     for (vector<int>::size_type i = 0; i < objectArray.size(); i++)
     {
@@ -94,28 +94,42 @@ bool State::QuitRequested()
     return quitRequested;
 }
 
-void State::AddObject(int mouseX, int mouseY)
+/* void */ weak_ptr<GameObject> State::AddObject(
+    // int mouseX, int mouseY
+    GameObject *gameObject)
 {
-    GameObject *penguin = new GameObject();
+    // GameObject *penguin = new GameObject();
 
-    Sprite *penguin_face = new Sprite(PENGUIN_FACE, *penguin);
-    penguin->AddComponent(penguin_face);
+    // Sprite *penguin_face = new Sprite(PENGUIN_FACE, *penguin);
+    // penguin->AddComponent(penguin_face);
 
-    penguin->box.x = mouseX - (penguin_face->GetWidth() / 2);
-    penguin->box.y = mouseY - (penguin_face->GetHeight() / 2);
-    penguin->box.w = penguin_face->GetWidth();
-    penguin->box.h = penguin_face->GetHeight();
+    // penguin->box.x = mouseX - (penguin_face->GetWidth() / 2);
+    // penguin->box.y = mouseY - (penguin_face->GetHeight() / 2);
+    // penguin->box.w = penguin_face->GetWidth();
+    // penguin->box.h = penguin_face->GetHeight();
 
-    Sound *explosion = new Sound(*penguin, EXPLOSION_SOUND);
-    penguin->AddComponent(explosion);
+    // Sound *explosion = new Sound(*penguin, EXPLOSION_SOUND);
+    // penguin->AddComponent(explosion);
 
-    Face *enemy = new Face(*penguin);
-    penguin->AddComponent(enemy);
+    // Face *enemy = new Face(*penguin);
+    // penguin->AddComponent(enemy);
 
-    objectArray.emplace_back(penguin);
+    // objectArray.emplace_back(penguin);
+
+    shared_ptr<GameObject> gameObj(gameObject);
+    objectArray.emplace_back(gameObj);
+
+    if (started)
+    {
+        gameObj->Start();
+    }
+
+    weak_ptr<GameObject> result = gameObj;
+    return result;
 }
 
-void State::Start() {
+void State::Start()
+{
     LoadAssets();
 
     for (vector<int>::size_type i = 0; i < objectArray.size(); i++)
@@ -124,4 +138,19 @@ void State::Start() {
     }
 
     started = true;
+}
+
+weak_ptr<GameObject> State::GetOjectPtr(GameObject *go)
+{
+    weak_ptr<GameObject> address;
+
+    for (vector<int>::size_type i = 0; i < objectArray.size(); i++)
+    {
+        if (objectArray[i].get() == go)
+        {
+            address = objectArray[i];
+        }
+    }
+
+    return address;
 }

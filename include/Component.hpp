@@ -15,6 +15,7 @@ public:
     void virtual Update(float) = 0;
     void virtual Render() = 0;
     bool virtual Is(string) = 0;
+    void virtual Start() = 0;
 
 protected:
     GameObject &associated;

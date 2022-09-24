@@ -13,6 +13,7 @@ public:
     void Update(float);
     void Render();
     bool Is(string);
+    void Start(){};
 };
 
 #endif
