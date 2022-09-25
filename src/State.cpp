@@ -4,6 +4,7 @@
 #include "InputManager.hpp"
 #include "Camera.hpp"
 #include "CameraFollower.hpp"
+#include "Alien.hpp"
 
 State::State()
 {
@@ -34,6 +35,13 @@ State::State()
     map->box.y = 0;
 
     objectArray.emplace_back(map);
+
+    GameObject *go = new GameObject();
+    go->box.x = 512;
+    go->box.y = 300;
+    Alien *alien = new Alien(*go, 2);
+    go->AddComponent(alien);
+    objectArray.emplace_back(go);
 
     LoadAssets();
     music.Play();
