@@ -24,6 +24,7 @@ private:
     };
     Vec2 speed;
     int hp;
+    int nMinions;
     queue<Action> taskQueue;
     vector<weak_ptr<GameObject>> minionArray;
 
@@ -33,7 +34,7 @@ public:
     void Update(float);
     void Render();
     bool Is(string);
-    void Start(){};
+    void Start();
 };
 
 #endif

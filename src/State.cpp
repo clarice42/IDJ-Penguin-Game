@@ -39,7 +39,7 @@ State::State()
     GameObject *go = new GameObject();
     go->box.x = 512;
     go->box.y = 300;
-    Alien *alien = new Alien(*go, 2);
+    Alien *alien = new Alien(*go, 3);
     go->AddComponent(alien);
     objectArray.emplace_back(go);
 

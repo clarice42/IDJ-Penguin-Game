@@ -2,16 +2,18 @@
 #include "Sprite.hpp"
 #include "InputManager.hpp"
 #include "Camera.hpp"
+#include "Minion.hpp"
+#include "Game.hpp"
 
-Alien::Alien(GameObject &associated, int nMinions) : Component(associated)
+Alien::Alien(GameObject &associated, int numMinions) : Component(associated)
 {
-    Sprite *spriteComp = new Sprite("assets/alien.png", associated);
-    associated.AddComponent(spriteComp);
+    Sprite *alienSprite = new Sprite("assets/alien.png", associated);
+    associated.AddComponent(alienSprite);
 
     speed.x = 20;
     speed.y = 20;
     hp = 30;
-    nMinions = nMinions;
+    nMinions = numMinions;
 }
 
 Alien::~Alien()
@@ -73,9 +75,9 @@ void Alien::Update(float dt)
     }
 }
 
-Alien::Action::Action(ActionType rectype, float x, float y)
+Alien::Action::Action(ActionType typeReceived, float x, float y)
 {
-    type = rectype;
+    type = typeReceived;
     pos.x = x;
     pos.y = y;
 }
@@ -85,4 +87,18 @@ void Alien::Render() {}
 bool Alien::Is(string type)
 {
     return type == "Alien";
+}
+
+void Alien::Start()
+{
+    weak_ptr<GameObject> alienCenter = Game::GetInstance().GetState().GetOjectPtr(&associated);
+
+    for (int i = 0; i < nMinions; i++)
+    {
+        GameObject *minionGo = new GameObject();
+        Minion *minion = new Minion(*minionGo, alienCenter, (360 / nMinions) * i);
+        minionGo->AddComponent(minion);
+
+        minionArray.emplace_back(Game::GetInstance().GetState().AddObject(minionGo));
+    }
 }
