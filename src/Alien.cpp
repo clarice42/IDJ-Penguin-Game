@@ -65,6 +65,8 @@ void Alien::Update(float dt)
         }
         else if (task.type == Action::SHOOT)
         {
+            Minion *minion = (Minion *)minionArray[rand() % minionArray.size()].lock().get()->GetComponent("Minion");
+            minion->Shoot(task.pos);
             taskQueue.pop();
         }
     }
