@@ -4,6 +4,8 @@
 #include <iostream>
 #include "GameObject.hpp"
 
+#define PI 3.14159265359
+
 using namespace std;
 
 class Bullet : public Component

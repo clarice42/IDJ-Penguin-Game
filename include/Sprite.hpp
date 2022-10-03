@@ -4,6 +4,7 @@
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.hpp"
 #include "Component.hpp"
+#include "Vec2.hpp"
 #include <iostream>
 
 using namespace std;
@@ -15,6 +16,7 @@ private:
     int width;
     int height;
     SDL_Rect clipRect;
+    Vec2 scale;
 
 public:
     Sprite(GameObject &);
@@ -30,6 +32,8 @@ public:
     void Update(float);
     bool Is(string);
     void Start(){};
+    void SetScale(float, float);
+    Vec2 GetScale();
 };
 
 #endif

@@ -4,6 +4,7 @@
 Bullet::Bullet(GameObject &associated, float angle, float recSpeed, int recDamage, float maxDistance, string sprite) : Component(associated)
 {
     Sprite *bulletSprite = new Sprite(sprite, associated);
+    associated.angleDeg = angle * 180 / PI;
     associated.AddComponent(bulletSprite);
 
     speed.x = recSpeed * cos(angle);

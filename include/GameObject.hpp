@@ -28,6 +28,7 @@ public:
     void Start();
     Component *GetComponent(string);
     Rect box;
+    double angleDeg;
 };
 
 #endif

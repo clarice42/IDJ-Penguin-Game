@@ -75,6 +75,8 @@ void Alien::Update(float dt)
     {
         associated.RequestDelete();
     }
+
+    associated.angleDeg -= VELOCIDADE_ANGULAR / 4;
 }
 
 Alien::Action::Action(ActionType typeReceived, float x, float y)

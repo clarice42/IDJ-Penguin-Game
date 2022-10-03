@@ -7,6 +7,11 @@
 Minion::Minion(GameObject &associated, weak_ptr<GameObject> recAlienCenter, float arcOffSetDeg) : Component(associated)
 {
     Sprite *minionSprite = new Sprite("assets/minion.png", associated);
+    
+    associated.angleDeg = arcOffSetDeg;
+    double scale = 1 + (random() % 6) % 10;
+    minionSprite->SetScale(scale, scale);
+
     associated.AddComponent(minionSprite);
 
     alienCenter = recAlienCenter;
