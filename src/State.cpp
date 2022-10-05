@@ -12,7 +12,7 @@ State::State()
     started = false;
     GameObject *background_image = new GameObject();
 
-    bg = new Sprite(BACKGROUND_PATH, *background_image);
+    bg = new Sprite(BACKGROUND_PATH, 1, 1, *background_image);
     background_image->AddComponent(bg);
 
     background_image->box.x = 0;

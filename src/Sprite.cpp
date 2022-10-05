@@ -9,11 +9,21 @@ Sprite::Sprite(GameObject &associated) : Component(associated)
     associated.box.h = height;
     scale.x = 1;
     scale.y = 1;
+    frameCount = 1;
+    frameTime = 1;
+    currentFrame = 0;
+    timeElapsed = 0;
 }
 
-Sprite::Sprite(string file, GameObject &associated) : Component(associated)
+Sprite::Sprite(string file, int recFrameCount, float recFrameTime, GameObject &associated) : Component(associated)
 {
+    frameCount = recFrameCount;
+    frameTime = recFrameTime;
+    currentFrame = 0;
+    timeElapsed = 0;
     texture = nullptr;
+    scale.x = 1;
+    scale.y = 1;
     Open(file);
 }
 
@@ -28,7 +38,7 @@ void Sprite::Open(string file)
         printf("Invalid texture: %s\n", SDL_GetError());
     }
 
-    SetClip(0, 0, width, height);
+    SetClip(0, 0, width/frameCount, height);
 }
 
 void Sprite::SetClip(int x, int y, int w, int h)
@@ -56,7 +66,7 @@ void Sprite::Render()
 
 int Sprite::GetWidth()
 {
-    return width * scale.x;
+    return (width * scale.x) / frameCount;
 }
 
 int Sprite::GetHeight()
@@ -73,7 +83,25 @@ bool Sprite::IsOpen()
     return false;
 }
 
-void Sprite::Update(float dt) {}
+void Sprite::Update(float dt)
+{
+    timeElapsed += dt;
+
+    if (timeElapsed > frameTime)
+    {
+        currentFrame++;
+
+        if (currentFrame >= frameCount)
+        {
+            currentFrame = 0;
+        }
+
+        int frameWidth = width / frameCount;
+        int currentFramePosition = frameWidth * currentFrame;
+        SetClip(currentFramePosition, 0, frameWidth, height);
+        timeElapsed = 0;
+    }
+}
 
 bool Sprite::Is(string type)
 {
@@ -100,4 +128,30 @@ void Sprite::SetScale(float scaleX, float scaleY)
 Vec2 Sprite::GetScale()
 {
     return scale;
+}
+
+void Sprite::SetFrame(int frame)
+{
+    currentFrame = frame;
+
+    int frameWidth = width / frameCount;
+    int currentFramePosition = frameWidth * currentFrame;
+    SetClip(currentFramePosition, 0, frameWidth, height);
+}
+
+void Sprite::SetFrameCount(int recFrameCount)
+{
+    frameCount = recFrameCount;
+
+    associated.box.w = width / frameCount;
+    associated.box.h = height;
+    scale.x = 1;
+    scale.y = 1;
+
+    currentFrame = 0;
+}
+
+void Sprite::SetFrameTime(float recFrameTime)
+{
+    frameTime = recFrameTime;
 }

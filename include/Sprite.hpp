@@ -17,10 +17,14 @@ private:
     int height;
     SDL_Rect clipRect;
     Vec2 scale;
+    int frameCount;
+    int currentFrame;
+    float timeElapsed;
+    float frameTime;
 
 public:
     Sprite(GameObject &);
-    Sprite(string, GameObject &);
+    Sprite(string, int, float, GameObject &);
     ~Sprite();
     void Open(string);
     void SetClip(int, int, int, int);
@@ -34,6 +38,9 @@ public:
     void Start(){};
     void SetScale(float, float);
     Vec2 GetScale();
+    void SetFrame(int);
+    void SetFrameCount(int);
+    void SetFrameTime(float);
 };
 
 #endif
