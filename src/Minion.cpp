@@ -47,7 +47,7 @@ void Minion::Shoot(Vec2 pos)
     bulletGo->box.x = associated.box.x;
     bulletGo->box.y = associated.box.y;
 
-    Bullet *bullet = new Bullet(*bulletGo, angle, 8, 10, 500, "assets/minionbullet1.png");
+    Bullet *bullet = new Bullet(*bulletGo, angle, 8, 10, 500, "assets/minionbullet2.png", 3, 1);
     bulletGo->AddComponent(bullet);
 
     Game::GetInstance().GetState().AddObject(bulletGo);

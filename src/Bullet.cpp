@@ -1,9 +1,9 @@
 #include "Bullet.hpp"
 #include "Sprite.hpp"
 
-Bullet::Bullet(GameObject &associated, float angle, float recSpeed, int recDamage, float maxDistance, string sprite) : Component(associated)
+Bullet::Bullet(GameObject &associated, float angle, float recSpeed, int recDamage, float maxDistance, string sprite, int frameCount, float frameTime) : Component(associated)
 {
-    Sprite *bulletSprite = new Sprite(sprite, 1, 1, associated);
+    Sprite *bulletSprite = new Sprite(sprite, frameCount, frameTime, associated);
     associated.angleDeg = angle * 180 / PI;
     associated.AddComponent(bulletSprite);
 
